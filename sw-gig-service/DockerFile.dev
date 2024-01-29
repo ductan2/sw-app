@@ -1,0 +1,14 @@
+FROM alpine:3.18
+ENV NODE_VERSION 20.5.1
+
+WORKDIR /app 
+COPY package.json ./
+COPY tsconfig.json ./
+COPY .npmrc ./
+COPY src ./src
+RUN ls -a 
+RUN apk add --no-cache nodejs npm
+RUN npm install && npm install -g nodemon
+EXPOSE 4000
+
+CMD [ "npm" , "run","dev" ]
